@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "start": "http-server && opener http://localhost:8080"
+  },
+  "dependencies": {
+    "@types/scratch-env": "^3.0.4",
+    "http-server": "^14.1.1",
+    "install": "^0.13.0",
+    "npm": "^11.0.0",
+    "opener": "^1.5.2",
+    "typescript": "^5.0.0"
+  }
+}

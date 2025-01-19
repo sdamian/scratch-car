@@ -1,8 +1,9 @@
 // @ts-check
 
 // docs https://github.com/scratchfoundation/scratch-vm/blob/develop/docs/extensions.md
-// run with `npx http-server`
-// open https://sheeptester.github.io/scratch-gui/?url=http://127.0.0.1:8080/hello.js
+
+
+const baseUrl = "http://localhost:8080";
 
 /** @implements {ScratchExtension} */
 class ScratchRemoteControl {
@@ -17,11 +18,11 @@ class ScratchRemoteControl {
         {
           opcode: "move",
           blockType: "command",
-          text: "Move [distance] steps",
+          text: "Move [direction]",
           arguments: {
-            distance: {
-              type: "number",
-              defaultValue: 5,
+            direction: {
+              type: "string",
+              defaultValue: "forward",
             },
           },
         },
@@ -29,10 +30,18 @@ class ScratchRemoteControl {
     };
   }
 
-  move({distance}) {
-    console.log("move", distance );
+  move({direction}) {
+    // id="forward" ontouchstart="fetch(document.location.origin+'/control?var=car&val=1');"ontouchend="fetch(document.location.origin+'/control?var=car&val=3');
+    this.post(direction);
+    this.post("stop");
   }
 
+  post(direction) {
+    fetch(baseUrl+'/car?move='+direction, {
+      method: 'POST',
+    });
+    console.log("move", direction);
+  }
 }
 
 Scratch.extensions.register(new ScratchRemoteControl());

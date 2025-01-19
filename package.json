@@ -1,9 +1,11 @@
 {
   "scripts": {
-    "start": "http-server && opener http://localhost:8080"
+    "start": "node index.js",
+    "open": "opener https://sheeptester.github.io/scratch-gui/?url=http://127.0.0.1:8080/car.js"
   },
   "dependencies": {
     "@types/scratch-env": "^3.0.4",
+    "express": "^4.21.2",
     "http-server": "^14.1.1",
     "install": "^0.13.0",
     "npm": "^11.0.0",
